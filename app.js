@@ -627,29 +627,23 @@ function setBadge(cls, txt) {
   g('btext').textContent = txt;
 }
 
-const LOG_MAX = 30; // baris maksimal yang ditampilkan
-
 function addLog(type, msg) {
-  const t   = new Date().toLocaleTimeString('id-ID', { hour12: false });
-  const cls = (msg.includes('TERANG') || msg.includes('AKTIF'))   ? 'on-txt'
+  const t  = new Date().toLocaleTimeString('id-ID', { hour12: false });
+  const cls = (msg.includes('TERANG') || msg.includes('AKTIF'))  ? 'on-txt'
             : (msg.includes('GELAP')  || msg.includes('STANDBY')) ? 'muted' : '';
   const html = `<span class="lt">${t}</span> <span class="lk">[${type}]</span> <span class="lm ${cls}">${msg}</span>`;
 
-  // Fungsi tambah ke satu container log
-  function pushTo(el) {
+  // Tulis ke kedua log (sidebar & mobile)
+  ['log', 'log-mobile'].forEach(id => {
+    const el = g(id);
     if (!el) return;
     const d = document.createElement('div');
     d.className = 'le';
     d.innerHTML = html;
     el.appendChild(d);
-    // Hapus baris paling lama jika sudah melebihi limit
-    while (el.children.length > LOG_MAX) el.removeChild(el.firstChild);
-    // Scroll ke baris paling baru (bawah)
     el.scrollTop = el.scrollHeight;
-  }
-
-  pushTo(g('log'));          // sidebar desktop
-  pushTo(g('mobile-log'));   // panel bawah mobile
+    while (el.children.length > 120) el.removeChild(el.firstChild);
+  });
 }
 
 function uptime() {
