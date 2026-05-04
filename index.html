@@ -113,7 +113,7 @@
         <div class="sb-stat" style="grid-column:1/-1"><div class="sb-stat-val sm" id="lu">—</div><div class="sb-stat-label">Update Terakhir</div></div>
       </div>
     </div>
-    <div class="sb-section" style="flex:1;display:flex;flex-direction:column;padding-bottom:0">
+    <div class="sb-section sb-log-section" style="flex:1;display:flex;flex-direction:column;padding-bottom:0">
       <div class="sb-section-label">Log MQTT</div>
       <div id="log" style="flex:1;border-radius:6px;border:1px solid var(--border2)">
         <div class="le"><span class="lt">--:--:--</span><span class="lm muted">Tekan Connect untuk mulai.</span></div>
@@ -291,9 +291,16 @@
         </div>
       </div>
 
+    </div><!-- end .content -->
+
+    <!-- LOG MQTT untuk mobile — tampil di bawah konten -->
+    <div id="mobile-log-wrap">
+      <span class="mlw-label">Log MQTT</span>
+      <div id="mobile-log" style="border-radius:6px;border:1px solid var(--border2)"></div>
     </div>
-  </div>
-</div>
+
+  </div><!-- end .main-area -->
+</div><!-- end #view-dashboard -->
 
 <script src="app.js"></script>
 </body>
